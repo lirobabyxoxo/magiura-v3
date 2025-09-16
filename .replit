@@ -1,0 +1,41 @@
+language = "nodejs"
+run = "node index.js"
+modules = ["nodejs-20"]
+
+[nix]
+channel = "stable-25_05"
+packages = ["python3"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Bot Discord"
+
+[[workflows.workflow]]
+name = "Bot Discord"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "console"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node index.js"
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[[ports]]
+localPort = 5000
+externalPort = 5000
+
+[agent]
+expertMode = true
